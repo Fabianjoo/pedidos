@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+/* HEADER */
+header{
+    background-color: gray;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboard{
+    display: flex;
+
+}
+
+.card{
+    background-color: ligh;
+    margin-right: 10px;
+}
+
+/* MAIN */
+
+.conteiner{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto auto;
+    height: 100vh;
+}
+
+/* FORMULARIO */
+.form{
+    background-color: lightpink;
+    grid-area: 1 / 1 / 3 / 2;
+}
+
+/* LISTA DE PEDIDOS */
+.lista{
+    background-color: lightcyan;
+    width: 100%;
+}
+
+/* KANBAN */
+.kanban{
+    background-color: lightcyan;
+    display: flex;
+    grid-area: 2 / 2 / -1 / -1;
+}
+
+.coluna{
+    height: 150px;
+    margin: 10px;
+    background-color: lightcoral;
+}

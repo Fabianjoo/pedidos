@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastelaria - Painel de Pedidos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <!-- HEADER -->
+        <header class="header">
+            <h1>🍴 Painel de Pedidos</h1>
+      
+            <div class="dashboard">
+              <div class="card">
+                <h3>Pedidos</h3>
+                <p id="totalPedidos">0</p>
+              </div>
+      
+              <div class="card">
+                <h3>Total R$</h3>
+                <p id="totalValor">0.00</p>
+              </div>
+      
+              <div class="card">
+                <h3>Ticket Médio</h3>
+                <p id="ticketMedio">0.00</p>
+              </div>
+            </div>
+          </header>
+
+        
+          <main class="conteiner">
+              <!-- ➕ FORMULÁRIO -->
+              <section class="form">
+                <h2>Novo Pedido</h2>
+                <form id="pedidoForm">
+                  <label>Nome</label>
+                  <input type="text" id="nome" required>
+                  <label>Tipo</label>
+                  <select id="tipo">
+                    <option value="balcao">Balcão</option>
+                    <option value="delivery">Delivery</option>
+                  </select>
+                  <label>Pagamento</label>
+                  <select id="pagamento">
+                    <option>Dinheiro</option>
+                    <option>Pix</option>
+                    <option>Cartão</option>
+                  </select>
+                  <label>Itens</label>
+                  <div class="itens">
+                    <div>
+                      <span>Pastel de Queijo</span>
+                      <input type="number" min="0" value="0" id="queijo">
+                    </div>
+                    <div>
+                      <span>Pastel de Carne</span>
+                      <input type="number" min="0" value="0" id="carne">
+                    </div>
+                    <div>
+                      <span>Refrigerante</span>
+                      <input type="number" min="0" value="0" id="refri">
+                    </div>
+                  </div>
+                  <label>Observação</label>
+                  <textarea id="obs"></textarea>
+                  <h3>Total: R$ <span id="total">0.00</span></h3>
+                  <button type="submit">Criar Pedido</button>
+                </form>
+              </section>
+              
+              <!-- 📋 LISTA DE PEDIDOS -->
+              <section class="lista">
+                <h2>Pedidos Recebidos</h2>
+                <div id="listaPedidos">
+                  <!-- JS vai inserir os pedidos aqui -->
+              
+                  <!-- Exemplo de card -->
+                  <!--
+                  <div class="pedido-card">
+                    <h4>#01 João</h4>
+                    <p>2 queijo, 1 carne</p>
+                    <span>R$ 25</span>
+                    <div class="acoes">
+                      <button>Aceitar</button>
+                      <button>Cancelar</button>
+                    </div>
+                  </div>
+                  -->
+                </div>
+              </section>
+
+                   <!-- 📦 KANBAN -->
+            <section class="kanban">
+                <div class="coluna">
+                  <h3>🟡 Em preparo</h3>
+                  <div id="emPreparo"></div>
+                </div>
+                <div class="coluna">
+                  <h3>🟢 Prontos</h3>
+                  <div id="pronto"></div>
+                </div>
+                <div class="coluna">
+                  <h3>⚫ Finalizados</h3>
+                  <div id="finalizado"></div>
+                </div>
+              </section>
+          </main>
+
+      
+ 
+</body>
+</html>
