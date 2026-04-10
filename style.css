@@ -24,6 +24,53 @@ header{
     margin-right: 10px;
 }
 
+/* POPOVERS */
+
+/* ITENS MANUAIS */
+.itensManuaisPopover{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+#itensManuais{
+    background-color: white;
+    border-radius: 10px;
+    width: 50%;
+    height: 50%;
+}
+
+/* CARDAPIO */
+.cardapioPopover{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#cardapio{
+    background-color: white;
+    border-radius: 10px;
+    width: 50%;
+    height: 50%;
+}
+
+
+
 /* MAIN */
 
 .conteiner{
@@ -38,6 +85,49 @@ header{
     background-color: lightpink;
     grid-area: 1 / 1 / 3 / 2;
 }
+
+.form > h2{
+    text-align: center;
+}
+
+.cliente{
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: aqua;
+    padding: 10px;
+}
+
+.manual{
+    background-color: bisque;
+    margin-top: 10px;
+}
+
+#btnPopoverItens{
+    cursor: pointer;
+}
+
+.cardapio{
+    background-color: gold;
+    margin-top: 10px;
+}
+
+#addProduto{
+    cursor: pointer;
+}
+
+.criar{
+    background-color: antiquewhite;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 10px;
+}
+
+#criarPedido{
+    display: block;
+    margin: auto;
+}
+
+
 
 /* LISTA DE PEDIDOS */
 .lista{

@@ -29,46 +29,94 @@
             </div>
           </header>
 
-        
+          <!-- POPOVERS -->
+
+          <!-- ITEM MANUAL -->
+          <div class="itensManuaisPopover">
+            <div id="itensManuais">
+              a
+            </div>
+          </div>
+
+          <!-- CARDAPIO -->
+          <div class="cardapioPopover">
+            <div id="cardapio">
+              b
+            </div>
+          </div>
+
+        <!-- MAIN -->
           <main class="conteiner">
               <!-- ➕ FORMULÁRIO -->
               <section class="form">
-                <h2>Novo Pedido</h2>
+                <h2>➕ Novo Pedido</h2>
+              
                 <form id="pedidoForm">
-                  <label>Nome</label>
-                  <input type="text" id="nome" required>
-                  <label>Tipo</label>
-                  <select id="tipo">
-                    <option value="balcao">Balcão</option>
-                    <option value="delivery">Delivery</option>
-                  </select>
-                  <label>Pagamento</label>
-                  <select id="pagamento">
-                    <option>Dinheiro</option>
-                    <option>Pix</option>
-                    <option>Cartão</option>
-                  </select>
-                  <label>Itens</label>
-                  <div class="itens">
-                    <div>
-                      <span>Pastel de Queijo</span>
-                      <input type="number" min="0" value="0" id="queijo">
-                    </div>
-                    <div>
-                      <span>Pastel de Carne</span>
-                      <input type="number" min="0" value="0" id="carne">
-                    </div>
-                    <div>
-                      <span>Refrigerante</span>
-                      <input type="number" min="0" value="0" id="refri">
-                    </div>
+              
+                  <!-- 👤 CLIENTE -->
+                  <div class="cliente">
+                    <h3>Informações do Cliente</h3>
+              
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" required>
+              
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone">
+              
+                    <label for="endereco">Endereço</label>
+                    <input type="text" id="endereco">
+              
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo">
+                      <option value="balcao">Balcão</option>
+                      <option value="delivery">Delivery</option>
+                    </select>
+              
+                    <label>Pagamento</label>
+                    <select id="pagamento">
+                      <option>Cartão</option>
+                      <option>Pix</option>
+                      <option>Dinheiro</option>
+                    </select>
                   </div>
-                  <label>Observação</label>
-                  <textarea id="obs"></textarea>
-                  <h3>Total: R$ <span id="total">0.00</span></h3>
-                  <button type="submit">Criar Pedido</button>
+
+                  <!-- ➕ ADIÇÃO MANUAL -->
+
+                    <div class="manual">
+                      <h3>Itens Avulsos</h3>
+                      <button type="button" id="btnPopoverItens"> + Adicionar Item Manual</button>
+                    </div>
+              
+                  <!-- 📋 CARDÁPIO -->
+                  <div class="cardapio">
+                    <h3>Itens do Cardápio</h3>
+              
+                    <div id="listaCardapio"></div>
+              
+                    <button type="button" id="addProduto"> + Adicionar Produto ao Cardápio</button>
+                  </div>
+              
+                  <div class="criar">
+                    <h3>Total: R$ <span id="total">0.00</span></h3>
+                    <!-- OBS -->
+                    <div class="obs">
+                      <label for="obs">Observação</label>
+                      <textarea id="obs"></textarea>
+                    </div>
+                    <button type="submit" id="criarPedido">Criar Pedido</button>
+                  </div>
                 </form>
               </section>
+
+
+
+
+
+
+
+
+
+
               
               <!-- 📋 LISTA DE PEDIDOS -->
               <section class="lista">
@@ -109,6 +157,7 @@
           </main>
 
       
- 
+    <script src="scripts/item-avulso.js"></script>
+    <script src="scripts/cardapio.js"></script>
 </body>
 </html>
