@@ -1,0 +1,13 @@
+/* KANBAN */
+.kanban{
+    background-color: lightcyan;
+    display: flex;
+    grid-area: 2 / 2 / -1 / -1;
+
+}
+
+.coluna{
+    height: 150px;
+    margin: 10px;
+    background-color: lightcoral;
+}
