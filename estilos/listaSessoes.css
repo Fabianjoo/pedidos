@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-/* LISTA DE PEDIDOS */
-.lista{
+.listaSessoes{
     background-color: lightcyan;
-    width: 100%;
-    
+    padding: 10px;
 }

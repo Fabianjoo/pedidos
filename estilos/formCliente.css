@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+/* FORMULARIO */
+.form{
+    background-color: var(--cor-primaria-clara);
+    grid-area: 1 / 1 / 2 / 2;
+    width: 100%;
+    padding: 10px;
+
+}
+
+.form > h2{
+    text-align: center;
+}
+
+.informacoesCliente{
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: var(--cor-primaria-fundo);
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.cadastrar{
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+}
+
+.cadastrar > button{
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--cor-primaria-media);
+    color: white;
+    font-weight: bold;
+}
+
+.cadastrar > button:hover{
+    background-color: white;
+    color: var(--cor-primaria-media);
+    
+}
+
+.sessaoBtn{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    background-color: var(--cor-primaria-escura);
+    border: 2px solid green;
+    color: white;
+    margin-top: 10px;
+}

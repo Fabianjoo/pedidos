@@ -6,35 +6,20 @@
     <title>Painel de Pedidos</title>
     <link rel="stylesheet" href="estilos/style.css">
     <link rel="stylesheet" href="estilos/popovers.css">
-    <link rel="stylesheet" href="estilos/listapedidos.css">
-    <link rel="stylesheet" href="estilos/kanban.css">
+    <link rel="stylesheet" href="estilos/listaClientes.css">
+    <link rel="stylesheet" href="estilos/listaSessoes.css">
+    <link rel="stylesheet" href="estilos/dashboard.css">
+    <link rel="stylesheet" href="estilos/formCliente.css">
 </head>
 <body>
       <!-- HEADER -->
         <header class="header">
-            <h1>🍴 Painel de Pedidos</h1>
-      
-            <div class="dashboard">
-              <div class="card">
-                <h3>Pedidos</h3>
-                <p id="totalPedidos">0</p>
-              </div>
-      
-              <div class="card">
-                <h3>Total R$</h3>
-                <p id="totalValor">0.00</p>
-              </div>
-      
-              <div class="card">
-                <h3>Ticket Médio</h3>
-                <p id="ticketMedio">0.00</p>
-              </div>
-            </div>
+            <h1>Gerenciador de Sessões (provisorio)</h1>
+            relogio
           </header>
 
           <!-- POPOVERS -->
-
-          <!-- ITEM MANUAL -->
+          <!-- NOVA SESSÃO -->
           <div class="itensManuaisPopover" style="display: none;">
             <div id="itensManuais">
               <h3>Adicionar Item ao Pedido</h3>
@@ -55,70 +40,49 @@
           
         <!-- MAIN -->
           <main class="conteiner">
-              <!-- ➕ FORMULÁRIO -->
+              <!--FORMULÁRIO -->
               <section class="form">
-                <h2>➕ Novo Pedido</h2>
-              
-                <form id="pedidoForm">
-              
-                  <!-- 👤 CLIENTE -->
-                  <div class="cliente">
-                    <h3>Informações do Cliente</h3>
-              
+                <h2>➕ Cadastro</h2>
+
+                 <!-- 👤 CLIENTE -->
+                <form id="clienteForm">
+                 
+                  <div class="informacoesCliente">
+                    <h3>👤 Informações do Cliente</h3>
+                
                     <label for="nomeCliente">Nome</label>
                     <input type="text" id="nomeCliente" required>
-              
+                
                     <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone">
-              
+                    <input type="tel" id="telefone" placeholder="(00) 00000-0000">
+                
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf"  placeholder="000.000.000-00">
+                
                     <label for="endereco">Endereço</label>
                     <input type="text" id="endereco">
-              
-                    <label for="tipo">Tipo</label>
-                    <select id="tipo">
-                      <option value="balcao">Balcão</option>
-                      <option value="delivery">Delivery</option>
-                    </select>
-              
-                    <label>Pagamento</label>
-                    <select id="pagamento">
-                      <option>Cartão</option>
-                      <option>Pix</option>
-                      <option>Dinheiro</option>
-                    </select>
+
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" placeholder="00000-000">
+
+                    <label for="numero">Número</label>
+                    <input type="number" id="numero">
+                  </div>
+                
+                  <div class="cadastrar">
+                    <button type="submit">Cadastrar Cliente</button>
                   </div>
 
-                  <!-- ➕ ADIÇÃO MANUAL -->
+                  </form>
 
-                    <div class="manual">
-                      <h3>Itens Avulsos</h3>
-                      <button type="button" id="btnPopoverItens"> + Adicionar Item Manual</button>
-                    </div>
-              
-                  <!-- 📋 CARDÁPIO -->
-                  <div class="cardapio">
-                    <h3>Cardápio</h3>
-                    
-                    <input type="text" id="inputCardapio" maxlength="50">
-                    <label for="preco">R$</label>
-                    <input type="number" id="preco" step="0.01" min="0" placeholder="R$ 0.00">
-                    <button type="button" id="addProduto"> + Adicionar Produto ao Cardápio</button>
-                    <div id="listaCardapio"></div>
+                  <div class="sessaoBtn">
+                    <h2>➕ Nova Sessão</h2>
                   </div>
+                </section>
+                
               
 
-                  <!-- CRIAR PEDIDO -->
-                  <div class="criar">
-                    <h3>Total: R$ <span id="total">0.00</span></h3>
-                    <!-- OBS -->
-                    <div class="obs">
-                      <label for="obs">Observação</label>
-                      <textarea id="obs"></textarea>
-                    </div>
-                    <button type="submit" id="criarPedido">Criar Pedido</button>
-                  </div>
-                </form>
-              </section>
+              
 
 
 
@@ -130,47 +94,275 @@
 
 
               
-              <!-- 📋 LISTA DE PEDIDOS -->
-              <section class="lista">
-                <h2>Pedidos Recebidos</h2>
-                <div id="listaPedidos">
-                  <!-- JS vai inserir os pedidos aqui -->
+              <!-- LISTA DE CLIENTES -->
+              <section class="listaClientes">
+                <h2>Clientes Cadastrados</h2>
+                <input type="text" id="BuscarCliente" placeholder="Buscar Cliente...">
+                <div class="clientesConteiner">
+                  <div class="cliente-card">
+                    <h4>João Silva</h4>
               
-                  <!-- Exemplo de card -->
-                  <!--
-                  <div class="pedido-card">
-                    <h4>#01 João</h4>
-                    <p>2 queijo, 1 carne</p>
-                    <span>R$ 25</span>
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
                     <div class="acoes">
-                      <button>Aceitar</button>
-                      <button>Cancelar</button>
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
                     </div>
                   </div>
-                  -->
+                  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>  <div class="cliente-card">
+                    <h4>João Silva</h4>
+              
+                    <p>📞 (54) 99999-1234</p>
+                    <p>📍 Centro - Caxias do Sul</p>
+              
+                    <div class="acoes">
+                      <button class="ver">Ver</button>
+                      <button class="editar">Editar</button>
+                    </div>
+                  </div>
+                  
+                  
                 </div>
               </section>
 
-                   <!-- 📦 KANBAN -->
-            <section class="kanban">
-                <div class="coluna">
-                  <h3>🟡 Em preparo</h3>
-                  <div id="emPreparo"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- LISTA DE SESSÕES -->
+            <section class="listaSessoes">
+              <h2>Sessões</h2>
+              <div class="conteinerSessoes">
+                <div class="sessoesBtn">
+                  <button id="btnHistorico">📜 Histórico</button>
+                  <button id="btnCalendario">📅 Calendário</button>
                 </div>
-                <div class="coluna">
-                  <h3>🟢 Prontos</h3>
-                  <div id="pronto"></div>
-                </div>
-                <div class="coluna">
-                  <h3>⚫ Finalizados</h3>
-                  <div id="finalizado"></div>
-                </div>
-              </section>
+
+                <h3>📅 Sessões de Hoje</h2>
+                  <div class="semSessão">
+                    <p>Não há sessões marcadas.</p>
+                  </div>
+
+                  <div class="comSessão">
+                    <div>
+                      (aqui colocar card com o mes/ano, um botao de proximo e anterior, e uma lista mostrando todas as sessoes marcadas em cada mes)
+                    </div>
+                  </div>
+               
+
+
+              </div>
+            
+            
+            
+            </section>
+
+
+
+          <!-- DASHBOARD -->
+            <section class="dashboard">
+              <h2>Dashboard</h2>
+            </section>
+
           </main>
 
-      
-    <script src="scripts/formulario/item-avulso.js"></script>
-    <script src="scripts/formulario/cardapio.js"></script>
-    <script src="scripts/formulario/calculoTotal.js"></script>
+
+
+
+
+          
+
 </body>
 </html>

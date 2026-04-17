@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+/* DASHBOARD*/
+.dashboard{
+    background-color: #FAEEDA;
+    display: flex;
+    grid-area: 2 / 1 / 3 / 2;
+    padding: 10px;
+
+}
+
