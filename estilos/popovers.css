@@ -1,2 +1,93 @@
 @charset "UTF-8";
 
+/* POPOVER INFO CLIENTES */
+.popoverCliente, .popoverSessao{
+    background-color: rgba(0, 0, 0, 0.300);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoCliente, .infoSessao{
+    padding: 10px;
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+    word-break: break-word;
+}
+
+.popover-sessoes{
+    width: 50vw;
+
+}
+
+/* FORM SESSAO */
+
+.infoSessao{
+    display: flex;
+    background-color: var(--cor-primaria-clara);
+    flex-flow: column nowrap;
+}
+
+.infoSessao > h3{
+    text-align: center;
+}
+
+.infoSessao input{
+    width: 300px;
+    padding: 5px;
+}
+
+.infoSessao > label{
+    margin-top: 10px;
+}
+
+.infoSessao > textarea{
+    margin-top: 10px;
+    resize: none;
+    height: 100px;   
+}
+
+.clientesDropdown{
+    margin-top: 5px;
+    width: 100%;
+    height: 100px;
+    background-color: var(--cor-primaria-fundo);
+    overflow-y: auto;
+    
+}
+
+.dropdown-option:hover{
+    background-color: var(--cor-primaria-media);
+    color: white;
+    cursor: pointer;
+}
+
+.sessao-acoes{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.sessao-acoes > button{
+    padding: 10px;
+    background-color: var(--cor-primaria-escura);
+    color: white;
+    border-radius: 5px;
+    border: 1px solid green;
+    cursor: pointer;
+}
+
+.sessao-acoes > button:hover{
+    background-color: white;
+    color: var(--cor-primaria-escura);
+}

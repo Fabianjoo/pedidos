@@ -19,24 +19,51 @@
           </header>
 
           <!-- POPOVERS -->
-          <!-- NOVA SESSÃO -->
-          <div class="itensManuaisPopover" style="display: none;">
-            <div id="itensManuais">
-              <h3>Adicionar Item ao Pedido</h3>
-          
-              <input type="text" id="itemAvulso" placeholder="Nome do item">
-          
-              <label>R$</label>
-              <input type="number" id="precoAvulso" step="0.01" min="0" placeholder="0.00">
-          
-              <label>Quantidade</label>
-              <input type="number" id="quantidadeAvulso" min="1" value="1">
-          
-              <button id="addItemAvulso">Adicionar</button>
-          
-              <div class="itemAvulso"></div>
+
+          <!-- INFO CLIENTE -->
+          <div class="popoverCliente">
+            <div class="infoCliente">
+
             </div>
           </div>
+
+          <!-- NOVA SESSÃO -->
+          <div class="popoverSessao">
+            <div class="infoSessao">
+              
+              <h3>📅 Nova Sessão</h3>
+
+              <!-- Cliente -->
+              <label for="clienteSessao">Cliente</label>
+              <input type="text" id="clienteSessao" placeholder="Buscar cliente..." oninput="filtrarClientes()">
+              <div class="clientesDropdown" id="clientesDropdown"></div>
+
+              <!-- Serviço -->
+              <label for="servicoSessao">Serviço</label>
+              <input type="text" id="servicoSessao" placeholder="Ex: Drenagem Linfática...">
+
+              <!-- Valor -->
+              <label for="valorSessao">Valor</label>
+              <input type="text" id="valorSessao" placeholder="R$ 0,00" oninput="mascaraValor(this)">
+
+              <!-- Data e Hora -->
+              <label for="dataSessao">Data</label>
+              <input type="date" id="dataSessao">
+
+              <label for="horaSessao">Horário</label>
+              <input type="time" id="horaSessao">
+
+              <!-- Observações -->
+              <label for="obsSessao">Observações</label>
+              <textarea id="obsSessao" placeholder="Observações..."></textarea>
+
+              <div class="sessao-acoes">
+                <button type="button" onclick="cadastrarSessao()">✅ Marcar Sessão</button>
+              </div>
+
+            </div>
+          </div>
+
           
         <!-- MAIN -->
           <main class="conteiner">
@@ -51,10 +78,10 @@
                     <h3>👤 Informações do Cliente</h3>
                 
                     <label for="nomeCliente">Nome</label>
-                    <input type="text" id="nomeCliente" required>
+                    <input type="text" id="nomeCliente">
                 
                     <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone" placeholder="(00) 00000-0000">
+                    <input type="text" id="telefone" placeholder="(00) 00000-0000">
                 
                     <label for="cpf">CPF</label>
                     <input type="text" id="cpf"  placeholder="000.000.000-00">
@@ -66,16 +93,16 @@
                     <input type="text" id="cep" placeholder="00000-000">
 
                     <label for="numero">Número</label>
-                    <input type="number" id="numero">
+                    <input type="text" id="numero">
                   </div>
                 
                   <div class="cadastrar">
-                    <button type="submit">Cadastrar Cliente</button>
+                    <button type="button" class="addCliente" onclick="cadastrarCliente()">Cadastrar Cliente</button>
                   </div>
 
                   </form>
 
-                  <div class="sessaoBtn">
+                  <div class="sessaoBtn" onclick="abrirPopoverSessao()">
                     <h2>➕ Nova Sessão</h2>
                   </div>
                 </section>
@@ -106,157 +133,6 @@
                     <p>📍 Centro - Caxias do Sul</p>
               
                   </div>
-
-
-                  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>  <div class="cliente-card">
-                    <h4>João Silva</h4>
-              
-                    <p>📞 (54) 99999-1234</p>
-                    <p>📍 Centro - Caxias do Sul</p>
-              
-                  </div>
-
-
-                  
-
                   
                   
                   
@@ -324,6 +200,13 @@
 
 
 
+
+
+
+<script src="scripts/formulario/addCliente.js"></script>
+<script src="scripts/formulario/padronizacao.js"></script>
+<script src="scripts/popovers/infoCliente.js"></script>
+<script src="scripts/popovers/addSessao.js"></script>
 
 
           

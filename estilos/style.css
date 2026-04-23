@@ -21,6 +21,7 @@ body {
     --cor-primaria-fundo:  #F0FAF4; 
   
   }
+  
 /* HEADER */
 header{
     background-color: var(--cor-primaria);

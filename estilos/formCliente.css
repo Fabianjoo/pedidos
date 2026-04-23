@@ -54,4 +54,10 @@
     border: 2px solid green;
     color: white;
     margin-top: 10px;
+    cursor: pointer;
+}
+
+.sessaoBtn:hover{
+    background-color:white ;
+    color: var(--cor-primaria-escura);
 }
