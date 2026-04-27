@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="estilos/listaSessoes.css">
     <link rel="stylesheet" href="estilos/dashboard.css">
     <link rel="stylesheet" href="estilos/formCliente.css">
+    <link rel="stylesheet" href="estilos/infoCliente.css">
 </head>
 <body>
       <!-- HEADER -->
@@ -30,37 +31,53 @@
           <!-- NOVA SESSÃO -->
           <div class="popoverSessao">
             <div class="infoSessao">
-              
               <h3>📅 Nova Sessão</h3>
-
-              <!-- Cliente -->
+          
+              <!-- Tipo de sessão -->
+              <div class="tipo-sessao">
+                <button type="button" class="tipo-tab ativo" data-tipo="avulsa" onclick="setTipoSessao('avulsa')">Sessão Avulsa</button>
+                <button type="button" class="tipo-tab" data-tipo="pacote" onclick="setTipoSessao('pacote')">Pacote de Sessões</button>
+              </div>
+          
+              <!-- Cliente (comum aos dois) -->
               <label for="clienteSessao">Cliente</label>
               <input type="text" id="clienteSessao" placeholder="Buscar cliente..." oninput="filtrarClientes()">
               <div class="clientesDropdown" id="clientesDropdown"></div>
-
-              <!-- Serviço -->
+          
+              <!-- Serviço (comum aos dois) -->
               <label for="servicoSessao">Serviço</label>
               <input type="text" id="servicoSessao" placeholder="Ex: Drenagem Linfática...">
-
-              <!-- Valor -->
-              <label for="valorSessao">Valor</label>
-              <input type="text" id="valorSessao" placeholder="R$ 0,00" oninput="mascaraValor(this)">
-
-              <!-- Data e Hora -->
-              <label for="dataSessao">Data</label>
-              <input type="date" id="dataSessao">
-
-              <label for="horaSessao">Horário</label>
-              <input type="time" id="horaSessao">
-
-              <!-- Observações -->
-              <label for="obsSessao">Observações</label>
-              <textarea id="obsSessao" placeholder="Observações..."></textarea>
-
-              <div class="sessao-acoes">
-                <button type="button" onclick="cadastrarSessao()">✅ Marcar Sessão</button>
+          
+              <!-- SESSÃO AVULSA -->
+              <div id="campos-avulsa">
+                <label for="valorSessao">Valor</label>
+                <input type="text" id="valorSessao" placeholder="R$ 0,00" oninput="mascaraValor(this)">
+          
+                <label for="dataSessao">Data</label>
+                <input type="date" id="dataSessao">
+          
+                <label for="horaSessao">Horário</label>
+                <input type="time" id="horaSessao">
+          
+                <label for="obsSessao">Observações</label>
+                <textarea id="obsSessao" placeholder="Observações..."></textarea>
               </div>
-
+          
+              <!-- PACOTE DE SESSÕES -->
+              <div id="campos-pacote" style="display:none">
+                <label for="qtdSessoesPacote">Qtd. de sessões contratadas</label>
+                <input type="number" id="qtdSessoesPacote" placeholder="Ex: 10" min="1">
+          
+                <label for="valorPacote">Valor do pacote</label>
+                <input type="text" id="valorPacote" placeholder="R$ 0,00" oninput="mascaraValor(this)">
+          
+                <label for="obsPacote">Observações</label>
+                <textarea id="obsPacote" placeholder="Observações..."></textarea>
+              </div>
+          
+              <div class="sessao-acoes">
+                <button type="button" onclick="cadastrarSessao()">✅ Cadastrar</button>
+              </div>
             </div>
           </div>
 
@@ -203,10 +220,9 @@
 
 
 
-<script src="scripts/formulario/addCliente.js"></script>
+<script src="scripts/popovers/addCliente.js"></script>
 <script src="scripts/formulario/padronizacao.js"></script>
 <script src="scripts/popovers/infoCliente.js"></script>
-<script src="scripts/popovers/addSessao.js"></script>
 
 
           

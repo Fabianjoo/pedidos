@@ -1,38 +1,89 @@
 function abrirPopover(cliente) {
-    const popover = document.querySelector('.popoverCliente');
-    const info = document.querySelector('.infoCliente');
-  
-    let enderecoCompleto = '';
-    if (cliente.endereco) enderecoCompleto += cliente.endereco;
-    if (cliente.numero)   enderecoCompleto += `, ${cliente.numero}`;
-    if (cliente.cep)      enderecoCompleto += ` - CEP: ${cliente.cep}`;
-  
-    const sessoesHTML = cliente.sessoes.length > 0
-      ? cliente.sessoes.map(s => `
-          <div class="sessao-card">
-            <p>💆 <strong>${s.servico}</strong></p>
-            <p>📅 ${s.data} às ${s.hora}</p>
-            ${s.valor ? `<p>💰 ${s.valor}</p>` : ''}
-            ${s.obs   ? `<p>📝 ${s.obs}</p>`   : ''}
-            <p>🔖 ${s.status}</p>
+  const popover = document.querySelector('.popoverCliente');
+  const info = document.querySelector('.infoCliente');
+
+  let enderecoCompleto = '';
+  if (cliente.endereco) enderecoCompleto += cliente.endereco;
+  if (cliente.numero)   enderecoCompleto += `, ${cliente.numero}`;
+  if (cliente.cep)      enderecoCompleto += ` - CEP: ${cliente.cep}`;
+
+  // Separa sessões avulsas e pacotes
+  const sessoesAvulsas = (cliente.sessoes || []).filter(s => s.tipo === 'avulsa' || !s.tipo);
+  const pacotes        = (cliente.sessoes || []).filter(s => s.tipo === 'pacote');
+
+  // ---- HTML: aba sessões ----
+  const sessoesHTML = sessoesAvulsas.length > 0
+    ? sessoesAvulsas.map(s => `
+        <div class="sessao-card">
+          <div class="sessao-card-top">
+            <strong>${s.servico}</strong>
+            <span class="badge badge-${s.status}">${s.status}</span>
           </div>
-        `).join('')
-      : '<p>Nenhuma sessão marcada.</p>';
-  
-    info.innerHTML = `
-      <h3>📋 Informações do Cliente</h3>
-  
-      <!-- MODO VISUALIZAÇÃO -->
-      <div class="popover-info" id="modoVisualizar">
-        <h4>👤 ${cliente.nome}</h4>
-        ${cliente.telefone ? `<p>📞 ${cliente.telefone}</p>` : ''}
-        ${cliente.cpf      ? `<p>🪪 ${cliente.cpf}</p>`      : ''}
-        ${enderecoCompleto ? `<p>📍 ${enderecoCompleto}</p>`  : ''}
-        <button onclick="modoEditar(${cliente.id})">✏️ Editar</button>
+          <p>📅 ${s.data} às ${s.hora}</p>
+          ${s.valor ? `<p>💰 ${s.valor}</p>` : ''}
+          ${s.obs   ? `<p>📝 ${s.obs}</p>`   : ''}
+        </div>
+      `).join('')
+    : '<p class="vazio">Nenhuma sessão avulsa marcada.</p>';
+
+  // ---- HTML: aba pacotes ----
+  const pacotesHTML = pacotes.length > 0
+    ? pacotes.map(p => {
+        const realizadas = p.sessoesRealizadas || 0;
+        const total      = p.totalSessoes || 0;
+        const pct        = total > 0 ? Math.round((realizadas / total) * 100) : 0;
+        return `
+          <div class="sessao-card pacote-card">
+            <div class="sessao-card-top">
+              <strong>${p.servico}</strong>
+              <span class="badge badge-${p.status}">${p.status}</span>
+            </div>
+            <div class="progresso-bar">
+              <div class="progresso-fill" style="width:${pct}%"></div>
+            </div>
+            <p class="progresso-label">${realizadas} de ${total} sessões realizadas</p>
+            ${p.valor ? `<p>💰 ${p.valor}</p>` : ''}
+            ${p.obs   ? `<p>📝 ${p.obs}</p>`   : ''}
+            <div class="sessao-acoes">
+              <button type="button" onclick="marcarSessaoPacote(${cliente.id}, ${p.id})">
+                ✅ Marcar sessão do pacote
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('')
+    : '<p class="vazio">Nenhum pacote contratado.</p>';
+
+  const iniciais = cliente.nome.split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase();
+
+  info.innerHTML = `
+    <h3>📋 Informações do Cliente</h3>
+
+    <!-- ABAS -->
+    <div class="abas-cliente">
+      <button class="aba-btn ativa" onclick="trocarAbaCliente('info', this)">Info</button>
+      <button class="aba-btn" onclick="trocarAbaCliente('sessoes', this)">
+        Sessões (${sessoesAvulsas.length})
+      </button>
+      <button class="aba-btn" onclick="trocarAbaCliente('pacotes', this)">
+        Pacotes (${pacotes.length})
+      </button>
+    </div>
+
+    <!-- ABA INFO -->
+    <div id="abaCliente-info" class="aba-painel ativa">
+      <div id="modoVisualizar">
+            <h4>${cliente.nome}</h4>
+            ${cliente.telefone ? `<p>📞 ${cliente.telefone}</p>` : ''}
+            ${cliente.cpf      ? `<p>🪪 ${cliente.cpf}</p>`            : ''}
+            ${enderecoCompleto ? `<p>📍 ${enderecoCompleto}</p>`        : ''}
+             <button onclick="modoEditar(${cliente.id})">✏️ Editar</button>
+          </div>
+        </div>
+        
       </div>
-  
-      <!-- MODO EDIÇÃO -->
-      <div class="popover-info" id="modoEditar" style="display:none">
+
+      <div id="modoEditar" style="display:none">
         <h4>✏️ Editar Cliente</h4>
         <label>Nome</label>
         <input id="editNome"     value="${cliente.nome     || ''}">
@@ -51,53 +102,38 @@ function abrirPopover(cliente) {
           <button onclick="modoVisualizar()">✖️ Cancelar</button>
         </div>
       </div>
-  
-      <hr>
-  
-      <div class="popover-sessoes">
-        <h4>📅 Sessões Agendadas</h4>
-        ${sessoesHTML}
-      </div>
-    `;
-  
-    popover.style.display = 'flex';
-  }
-  
-  
-  function modoEditar(id) {
-    document.getElementById('modoVisualizar').style.display = 'none';
-    document.getElementById('modoEditar').style.display     = 'block';
-  }
-  
-  function modoVisualizar() {
-    document.getElementById('modoVisualizar').style.display = 'block';
-    document.getElementById('modoEditar').style.display     = 'none';
-  }
-  
-  function salvarEdicaoCliente(id) {
-    const index = clientes.findIndex(c => c.id === id);
-    if (index === -1) return;
-  
-    clientes[index] = {
-      ...clientes[index],
-      nome:     document.getElementById('editNome').value,
-      telefone: document.getElementById('editTelefone').value,
-      cpf:      document.getElementById('editCpf').value,
-      endereco: document.getElementById('editEndereco').value,
-      numero:   document.getElementById('editNumero').value,
-      cep:      document.getElementById('editCep').value,
-    };
-  
-    salvarDados();
-    renderizarClientes();
-    abrirPopover(clientes[index]); // recarrega o popover com dados atualizados
-  }
-  
-  
-  function fecharPopover() {
-    document.querySelector('.popoverCliente').style.display = 'none';
-  }
-  
-  document.querySelector('.popoverCliente').addEventListener('click', function(e) {
-    if (e.target === this) fecharPopover();
-  });
+    </div>
+
+    <!-- ABA SESSÕES -->
+    <div id="abaCliente-sessoes" class="aba-painel" style="display:none">
+      ${sessoesHTML}
+    </div>
+
+    <!-- ABA PACOTES -->
+    <div id="abaCliente-pacotes" class="aba-painel" style="display:none">
+      ${pacotesHTML}
+    </div>
+  `;
+
+  popover.style.display = 'flex';
+}
+
+function trocarAbaCliente(id, el) {
+  document.querySelectorAll('.aba-painel').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.aba-btn').forEach(b => b.classList.remove('ativa'));
+  document.getElementById('abaCliente-' + id).style.display = 'flex';
+  el.classList.add('ativa');
+}
+
+  // Abre o popover de nova sessão já com o cliente pré-selecionado e o serviço preenchido
+  clienteSelecionadoId = clienteId;
+  document.getElementById('clienteSessao').value = cliente.nome;
+  document.getElementById('servicoSessao').value = pacote.servico;
+
+  // Guarda referência ao pacote para vincular depois do cadastro
+  pacoteAtualId = pacoteId;
+
+  fecharPopover(); // fecha o popover do cliente
+  abrirPopoverSessao(); // abre o popover de sessão
+
+

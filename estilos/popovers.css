@@ -14,11 +14,20 @@
     align-items: center;
 }
 
-.infoCliente, .infoSessao{
+.infoSessao{
     padding: 10px;
     background-color: white;
     width: fit-content;
-    height: fit-content;
+    height: 590px;
+    border-radius: 5px;
+    word-break: break-word;
+}
+
+.infoCliente{
+    padding: 10px;
+    background-color: white;
+    width: 80%;
+    height: 80%;
     border-radius: 5px;
     word-break: break-word;
 }
@@ -40,19 +49,49 @@
     text-align: center;
 }
 
+.tipo-sessao{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.tipo-sessao > button{
+    padding: 5px;
+    cursor: pointer;
+    background-color: var(--cor-primaria-media);
+    color: white;
+    font-weight: bold;
+}
+
+.tipo-sessao > button:hover{
+    background-color: white;
+    color: var(--cor-primaria-media);
+    font-weight: bold;
+}
+
+.tipo-sessao > button:first-child{
+    margin-right: 5px;
+}
+
 .infoSessao input{
     width: 300px;
     padding: 5px;
 }
 
-.infoSessao > label{
+.infoSessao > label, #campos-avulsa > label, #campos-pacote > label{
     margin-top: 10px;
 }
 
-.infoSessao > textarea{
-    margin-top: 10px;
-    resize: none;
-    height: 100px;   
+#campos-avulsa{
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#campos-pacote{
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .clientesDropdown{
