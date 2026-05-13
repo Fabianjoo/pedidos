@@ -113,7 +113,7 @@ function renderCalendario() {
   const mesStr = calAno + '-' + String(calMes + 1).padStart(2, '0');
 
   const doMes = sessoes.filter(s =>
-    s.tipo !== 'pacote' && s.data && s.data.startsWith(mesStr) && !s.finalizada
+    s.tipo !== 'pacote' && s.data && s.data.startsWith(mesStr) && !s.finalizada && s.status !== 'cancelada'
   );
 
   if (doMes.length === 0) {
@@ -155,7 +155,7 @@ function renderHistorico() {
 
   const finalizadas = sessoes.filter(s =>
     s.tipo !== 'pacote' && s.data && s.hora &&
-    (s.finalizada || getStatus(s, agora) === 'concluida')
+    (s.finalizada || s.status === 'cancelada' || getStatus(s, agora) === 'concluida')
   );
 
   if (finalizadas.length === 0) {
@@ -173,12 +173,17 @@ function renderHistorico() {
 
   lista.innerHTML = btnLimpar + finalizadas.map(s => {
     const [ano, mes, dia] = s.data.split('-');
+    const isCancelada = s.status === 'cancelada';
+
     return `
-      <div class="hist-item">
+      <div class="hist-item ${isCancelada ? 'sessao-cancelada' : ''}">
         <div>
           <div class="hist-data">${dia}/${mes}/${ano}</div>
           <div class="hist-nome">${s.nomeCliente}</div>
           <div class="hist-detalhe">${s.servico} · ${s.hora}</div>
+          ${isCancelada ? `
+            <span class="motivo-cancelamento">❌ Cancelada: ${s.observacaoCancelamento}</span>
+          ` : ''}
         </div>
       </div>
     `;
@@ -207,16 +212,28 @@ function finalizarSessao(id) {
 }
 
 function cancelarSessao(id) {
-  if (!confirm('Cancelar esta sessão? Ela será removida permanentemente.')) return;
-
   const sessao = sessoes.find(s => s.id === id);
   if (!sessao) return;
 
-  sessoes = sessoes.filter(s => s.id !== id);
+  // Modal de confirmação com campo de observações
+  const motivo = prompt('Motivo do cancelamento (obrigatório):');
+  if (motivo === null) return; // clicou em cancelar
+  if (!motivo.trim()) {
+    alert('Informe o motivo do cancelamento.');
+    return;
+  }
+
+  sessao.status = 'cancelada';
+  sessao.observacaoCancelamento = motivo.trim();
+  sessao.dataCancelamento = new Date().toISOString();
 
   const cliente = clientes.find(c => c.id === sessao.clienteId);
   if (cliente && cliente.sessoes) {
-    cliente.sessoes = cliente.sessoes.filter(s => s.id !== id);
+    const s = cliente.sessoes.find(s => s.id === id);
+    if (s) {
+      s.status = 'cancelada';
+      s.observacaoCancelamento = motivo.trim();
+    }
   }
 
   salvarDados();

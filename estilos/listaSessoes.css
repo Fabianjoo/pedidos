@@ -334,3 +334,17 @@
   opacity: 1;
   background: var(--color-background-success, #dcfce7);
 }
+
+.sessao-cancelada {
+  background-color: #ffe5e5;
+  border-left: 4px solid #e53935;
+  opacity: 0.85;
+}
+
+.motivo-cancelamento {
+  color: #c62828;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 4px;
+  display: block;
+}
