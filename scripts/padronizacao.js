@@ -44,5 +44,5 @@ document.getElementById('telefone').addEventListener('input', function(e) {
   
   
   document.getElementById('nomeCliente').addEventListener('input', function(e) {
-    e.target.value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s\-0-9]/g, '');
+    e.target.value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s\-\']/g, '');
   });

@@ -70,8 +70,13 @@ function cadastrarCliente() {
     return;
   }
 
-  if (!telefone) {
+  if (telefone.length < 14) {
     alert('⚠️ Por favor, preencha o telefone do cliente.');
+    return;
+  }
+
+  if (cpf && cpf.length < 14) {
+    alert('⚠️ O CPF informado está incompleto.');
     return;
   }
 
@@ -234,7 +239,7 @@ function modoEditar(id) {
   });
 
   document.getElementById('editNome').addEventListener('input', function(e) {
-    e.target.value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+    e.target.value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s\-\']/g, '');
   });
 }
 
@@ -249,11 +254,30 @@ function salvarEdicaoCliente(id) {
   const index = clientes.findIndex(c => c.id === id);
   if (index === -1) return;
 
+  const nome     = document.getElementById('editNome').value.trim();
+  const telefone = document.getElementById('editTelefone').value.trim();
+  const cpf      = document.getElementById('editCpf').value.trim();
+
+  if (!nome) {
+    alert('⚠️ O nome do cliente é obrigatório.');
+    return;
+  }
+
+  if (telefone.length < 14) {
+    alert('⚠️ Telefone incompleto.');
+    return;
+  }
+
+  if (cpf && cpf.length < 14) {
+    alert('⚠️ CPF incompleto.');
+    return;
+  }
+
   clientes[index] = {
     ...clientes[index],
-    nome:     document.getElementById('editNome').value,
-    telefone: document.getElementById('editTelefone').value,
-    cpf:      document.getElementById('editCpf').value,
+    nome,
+    telefone,
+    cpf,
     endereco: document.getElementById('editEndereco').value,
     numero:   document.getElementById('editNumero').value,
     cep:      document.getElementById('editCep').value,
