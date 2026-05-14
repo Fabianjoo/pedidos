@@ -71,7 +71,7 @@ function cadastrarCliente() {
   }
 
   if (telefone.length < 14) {
-    alert('⚠️ Por favor, preencha o telefone do cliente.');
+    alert('⚠️ Por favor, preencha o telefone do cliente corretamente.');
     return;
   }
 
@@ -260,6 +260,7 @@ function salvarEdicaoCliente(id) {
   const nome     = document.getElementById('editNome').value.trim();
   const telefone = document.getElementById('editTelefone').value.trim();
   const cpf      = document.getElementById('editCpf').value.trim();
+  const cep      = document.getElementById('editCep').value.trim();
 
   if (!nome) {
     alert('⚠️ O nome do cliente é obrigatório.');
@@ -267,12 +268,17 @@ function salvarEdicaoCliente(id) {
   }
 
   if (telefone.length < 14) {
-    alert('⚠️ Telefone incompleto.');
+    alert('⚠️ Por favor, preencha o telefone do cliente corretamente.');
     return;
   }
 
   if (cpf && cpf.length < 14) {
-    alert('⚠️ CPF incompleto.');
+    alert('⚠️ O CPF informado está incompleto.');
+    return;
+  }
+
+  if (cep && cep.length < 9) {
+    alert('⚠️ O CEP informado está incompleto.');
     return;
   }
 
