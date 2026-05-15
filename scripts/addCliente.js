@@ -327,6 +327,7 @@ let pacoteAtualId        = null;
 let tipoSessaoAtual      = 'avulsa';
 
 function abrirPopoverSessao() {
+  document.getElementById('servicoSessao').removeAttribute('readonly');
   clienteSelecionadoId = null;
   pacoteAtualId        = null;
   document.getElementById('clienteSessao').value        = '';
@@ -429,12 +430,15 @@ function marcarSessaoPacote(clienteId, pacoteId) {
   fecharPopover();
   abrirPopoverSessao();
 
-  // preenche DEPOIS de abrir
   clienteSelecionadoId = clienteId;
   document.getElementById('clienteSessao').value        = cliente.nome;
-  document.getElementById('servicoSessao').value        = pacote.servico;
   document.getElementById('clientesDropdown').innerHTML = '';
   pacoteAtualId = pacoteId;
+
+  // Preenche o serviço e torna somente leitura
+  const inputServico = document.getElementById('servicoSessao');
+  inputServico.value = pacote.servico;
+  inputServico.setAttribute('readonly', true);
 
   // Oculta o campo valor pois o pacote já foi pago
   const labelValor = document.querySelector('label[for="valorSessao"]');
